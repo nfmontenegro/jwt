@@ -9,9 +9,7 @@ import { verifyToken } from '../middleware/verifyToken'
 
 const router = express.Router()
 
-const { secretKey } = config
-
-const saltRounds = 10
+const { secretKey, saltRound } = config
 
 router.get('/', verifyToken, (req, res) => {
   const { token } = req
