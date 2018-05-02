@@ -1,41 +1,27 @@
 import express from 'express'
 import bodyParser from 'express'
+import mongoose from 'mongoose'
 import morgan from 'morgan'
-import jwt from 'jsonwebtoken'
 import cors from 'cors'
 
-import { config } from './config/secret'
-import { verifyToken } from './middleware/verifyToken'
+import user from './routes/user'
 
 const app = express()
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load()
+}
+const DB = process.env.MONGODB
+const PORT = process.env.PORT
+
+mongoose.connect(DB)
 
 app.use(bodyParser.json())
 app.use(morgan('short'))
 app.use(cors())
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load()
-}
+app.use('/api', user)
 
-app.get('/api', verifyToken, (req, res) => {
-  jwt.verify(req.token, config.secretKey, (err, data) => {
-    if (err) {
-      res.sendStatus(403)
-    } else {
-      res.json({
-        token: req.token,
-        message: 'Hello'
-      })
-    }
-  })
-})
+app.listen(PORT, () => console.log(`Server listening: ${PORT} 🚀`))
 
-app.post('/api/login', (req, res) => {
-  jwt.sign(req.body, config.secretKey, { expiresIn: '1h' }, (err, token) => {
-    res.json({ token })
-  })
-})
-
-app.listen(process.env.PORT, () =>
-  console.log(`Server listening: ${process.env.PORT}`)
-)
+export default app
