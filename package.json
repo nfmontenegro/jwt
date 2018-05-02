@@ -1,0 +1,30 @@
+{
+  "name": "jwt",
+  "version": "1.0.0",
+  "description": "jwt",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=develop nodemon index.js --exec babel-node --presets es2015,stage-2",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/nfmontenegro/jwt"
+  },
+  "author": "Nicolás Flores Montenegro",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0",
+    "babel-register": "^6.11.6",
+    "nodemon": "^1.10.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "morgan": "^1.9.0"
+  }
+}
