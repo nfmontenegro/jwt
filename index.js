@@ -31,7 +31,7 @@ app.get('/api', verifyToken, (req, res) => {
 })
 
 app.post('/api/login', (req, res) => {
-  jwt.sign(req.body, config.secretKey, { expiresIn: '30s' }, (err, token) => {
+  jwt.sign(req.body, config.secretKey, { expiresIn: '1h' }, (err, token) => {
     res.json({ token })
   })
 })

@@ -7,6 +7,11 @@ export const verifyToken = (req, res, next) => {
     const bearer = bearerHeader.split(' ')
     const bearerToken = bearer[1]
     req.token = bearerToken
+
+    //decoded token
+    const decoded = jwt.decode(bearerToken, { complete: true })
+    console.log(decoded)
+
     next()
   } else {
     res.sendStatus(403)
