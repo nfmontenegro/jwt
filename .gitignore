@@ -58,3 +58,5 @@ typings/
 .env
 
 config/secret.js
+./config/secret.js
+/config/secret.js
