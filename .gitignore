@@ -57,6 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# config
 config/secret.js
-./config/secret.js
-/config/secret.js
