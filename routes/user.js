@@ -34,9 +34,8 @@ router.post('/register', (req, res) => {
         })
       } else {
         bcrypt
-          .hash(req.body.password, saltRounds)
+          .hash(req.body.password, saltRound)
           .then(passwordCrypt => {
-            console.log(passwordCrypt)
             req.body.password = passwordCrypt
             const user = new User(req.body)
             user.save()
@@ -63,6 +62,7 @@ router.post('/login', (req, res) => {
       User.find({ email })
         .then(user => {
           if (user.length) {
+            console.log(password, user[0].password)
             bcrypt
               .compare(password, user[0].password)
               .then(password => {
