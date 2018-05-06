@@ -18,13 +18,14 @@ describe('Request Api', () => {
       .then(res => res.json())
       .then(({ token, msg, isAuthenticated }) => {
         postToken = token
-
-        should.equal(isAuthenticated, true, 'Boolean authenticated')
         isAuthenticated.should.be.ok()
-        msg.should.be.eql('user nico666@gmail.com authenticated')
-        should(token).be.a.String()
-        should(msg).be.a.String()
 
+        msg.should.be.eql('user nico666@gmail.com authenticated')
+        isAuthenticated.should.be.eql(true)
+        should.equal(isAuthenticated, true, 'Boolean authenticated')
+
+        should(msg).be.a.String()
+        should(isAuthenticated).be.an.Boolean()
         done()
       })
       .catch(err => done(err))
@@ -33,6 +34,8 @@ describe('Request Api', () => {
 
 describe('token', () => {
   it('verify token', done => {
+    should(postToken).be.a.String()
+    postToken.should.startWith('e')
     done()
   })
 })
