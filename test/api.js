@@ -1,12 +1,9 @@
-const chai = require('chai')
+const should = require('should')
 const fetch = require('node-fetch')
-
-const should = chai.should()
-const expect = chai.expect
-const assert = chai.assert
 
 const email = 'nico666@gmail.com'
 const password = '123'
+let postToken
 
 describe('Request Api', () => {
   it('do request login api', done => {
@@ -19,12 +16,23 @@ describe('Request Api', () => {
       body: JSON.stringify({ email, password })
     })
       .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        expect(data).to.be.a('object')
-        assert.typeOf(data, 'object')
+      .then(({ token, msg, isAuthenticated }) => {
+        postToken = token
+
+        should.equal(isAuthenticated, true, 'Boolean authenticated')
+        isAuthenticated.should.be.ok()
+        msg.should.be.eql('user nico666@gmail.com authenticated')
+        should(token).be.a.String()
+        should(msg).be.a.String()
+
         done()
       })
       .catch(err => done(err))
+  })
+})
+
+describe('token', () => {
+  it('verify token', done => {
+    done()
   })
 })

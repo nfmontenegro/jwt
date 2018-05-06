@@ -62,7 +62,6 @@ router.post('/login', (req, res) => {
       User.find({ email })
         .then(user => {
           if (user.length) {
-            console.log(password, user[0].password)
             bcrypt
               .compare(password, user[0].password)
               .then(password => {
