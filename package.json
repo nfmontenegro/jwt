@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=develop nodemon index.js --exec babel-node --presets es2015,stage-2",
-    "test": "mocha -c --reporter list test/api.js",
-    "test:watch": "mocha -c -w --reporter list test/api.js"
+    "test": "mocha -c --reporter spec test/api.js",
+    "test:watch": "mocha -c -w --reporter spec test/api.js"
   },
   "repository": {
     "type": "git",

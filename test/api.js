@@ -32,7 +32,7 @@ describe('Request Api', () => {
   })
 })
 
-describe('token', () => {
+describe('Response token', () => {
   it('verify token', done => {
     should(postToken).be.a.String()
     postToken.should.startWith('e')
