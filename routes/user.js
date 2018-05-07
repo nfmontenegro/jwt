@@ -1,9 +1,8 @@
 import express from 'express'
 import { registerUser, loginUser, getUsers } from '../controllers/user'
+import { verifyToken } from '../middleware/verifyToken'
 
 const router = express.Router()
-
-const { secretKey, saltRound } = config
 
 router.get('/', verifyToken, getUsers)
 

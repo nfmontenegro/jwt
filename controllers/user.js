@@ -4,7 +4,8 @@ import bcrypt from 'bcrypt'
 import User from '../models/user'
 
 import { config } from '../config/secret'
-import { verifyToken } from '../middleware/verifyToken'
+
+const { secretKey, saltRound } = config
 
 export const getUsers = (req, res) => {
   const { token } = req
