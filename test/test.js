@@ -1,9 +1,8 @@
-const should = require('should')
 const fetch = require('node-fetch')
 
 const email = 'nico666@gmail.com'
 const password = '123'
-let postToken
+let userToken
 
 describe('Request Api', () => {
   it('do request login api', done => {
@@ -17,15 +16,14 @@ describe('Request Api', () => {
     })
       .then(res => res.json())
       .then(({ token, msg, isAuthenticated }) => {
-        postToken = token
-        isAuthenticated.should.be.ok()
+        userToken = token
 
-        msg.should.be.eql('user nico666@gmail.com authenticated')
-        isAuthenticated.should.be.eql(true)
-        should.equal(isAuthenticated, true, 'Boolean authenticated')
-
-        should(msg).be.a.String()
-        should(isAuthenticated).be.an.Boolean()
+        expect.stringContaining(msg)
+        expect.stringContaining(token)
+        expect(isAuthenticated).not.toBe(false)
+        expect(!isAuthenticated).toBeFalsy()
+        expect(isAuthenticated).toBeTruthy()
+        expect(msg).toBe('user nico666@gmail.com authenticated')
         done()
       })
       .catch(err => done(err))
@@ -34,8 +32,10 @@ describe('Request Api', () => {
 
 describe('Response token', () => {
   it('verify token', done => {
-    should(postToken).be.a.String()
-    postToken.should.startWith('e')
+    expect.stringContaining(userToken)
+    expect(userToken).not.toBe(false)
+    expect(userToken).toBe(userToken)
+
     done()
   })
 })
